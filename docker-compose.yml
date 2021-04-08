@@ -1,0 +1,46 @@
+version: '3.3'
+services:
+  web:
+    image: 34.66.136.31:8085/myphp
+    container_name: app
+    depends_on:
+      - db
+    volumes:
+      - ./src:/var/www/html/
+    ports:
+      - 8001:80
+    networks:
+      - default
+
+  db:
+    container_name: devops-db
+    image: mariadb:10.4.18
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devops-ci
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - db-volume:/var/lib/mysql
+    ports:
+      - 6033:3306
+    networks:
+      - default
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8082:80
+    depends_on:
+      - db
+    networks:
+      - default
+    environment:
+      - PMA_ARBITRARY=1
+  
+volumes:
+  db-volume:
+    driver: local
+    

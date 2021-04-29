@@ -210,20 +210,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="notificationsForm">
+                <form id="updateNotificationsForm" method="POST" action="<?php base_url('dashboard/update_notifications') ?>">
                     <div id="notifications_notification"></div>
                     <div class="custom-control custom-switch ml-5">
-                        <input type="checkbox" class="custom-control-input" id="sms_notifications_switch" name="sms_notifications_switch">
+                        <input type="checkbox" class="custom-control-input" id="sms_notifications_switch" name="sms_notifications_switch" <?php if($user[0]['sms_notifications'] == 1) { ?> checked <?php } ?>>
                         <label class="custom-control-label" for="sms_notifications_switch">SMS Notifications</label>
                         <div class="text-muted">SMS messages are sent when package statuses is updated.</div>
                     </div>
                     <div class="custom-control custom-switch ml-5 mt-3">
-                        <input type="checkbox" class="custom-control-input" id="email_notifications_switch" name="email_notifications_switch">
+                        <input type="checkbox" class="custom-control-input" id="email_notifications_switch" name="email_notifications_switch" <?php if($user[0]['email_notifications'] == 1) { ?> checked <?php } ?>>
                         <label class="custom-control-label" for="email_notifications_switch">Email Notifications</label>
                         <div class="text-muted">Emails about your package statuses.</div>
                     </div>
                     <div class="custom-control custom-switch ml-5 mt-3">
-                        <input type="checkbox" class="custom-control-input" id="deals_notifications_switch" name="deals_notifications_switch">
+                        <input type="checkbox" class="custom-control-input" id="deals_notifications_switch" name="deals_notifications_switch" <?php if($user[0]['deals_notifications'] == 1) { ?> checked <?php } ?>>
                         <label class="custom-control-label" for="deals_notifications_switch">Deals Notifications</label>
                         <div class="text-muted">Emails about deals available for your account.</div>
                     </div>
@@ -231,7 +231,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" form="notificationsForm" class="btn btn-primary">Save changes</button>
+                <button type="submit" form="updateNotificationsForm" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

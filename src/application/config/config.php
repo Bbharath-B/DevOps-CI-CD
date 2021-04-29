@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://35.226.36.48:8001/';
+$config['base_url'] = 'http://34.67.183.171:8001/';
 /*
 |--------------------------------------------------------------------------
 | Index File

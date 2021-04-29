@@ -8,7 +8,7 @@
 
 		<div class="contact-page-header-container mw-750 ml-auto mr-auto">
 			<div class="row">
-				<div class="col-md-6">
+				<!-- <div class="col-md-6">
 				
 					<div class="card shadow ht-100 mt-4">
 						<div class="card-body">
@@ -28,8 +28,8 @@
 						</div>
 					</div>
 
-				</div>
-				<div class="col-md-6">
+				</div> -->
+				<div class="col-md-12">
 					
 					<div class="card shadow ht-100 mt-4">
 						<div class="card-body">
@@ -41,9 +41,9 @@
 								<p class="description text-center">
 								If you can't stay online for your answer, simply send us a message. We'll do our best to reply to all message within 2 business hours.<br><br>
 								</p>
-								<a href="#" class="btn btn-sm btn-secondary btn-full">Start Chat 
+								<button class="btn btn-sm btn-secondary btn-full" data-target="#contactModal" data-toggle="modal">Send Message
 									<i class="fas fa-caret-right text-primary"></i>
-								</a>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -91,3 +91,56 @@
 		</div>
 	</div>
 </div>			
+
+
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">What's On Your Mind?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+				<div id="response_container"></div>
+				
+				<?php echo form_open('contact', array('id' => 'contactForm'));?>
+					<div class="form-group">
+						<label for="name">Your name<i class="text-warning">*</i></label>
+						<input type="text" class="form-control" required="required" id="name" name="name">
+					</div>
+					<div class="form-group">
+						<label for="email">Your email address<i class="text-warning">*</i></label>
+						<input type="email" class="form-control" required="required" id="email" name="email">
+					</div>
+					<div class="form-group">
+						<label for="subject">Subject<i class="text-warning">*</i></label>
+						<select type="text" class="form-control" required="required" id="subject" name="subject">
+							<option value="General Enquiry">General Enquiry</option>
+							<option value="Technical Issue">Technical Issue</option>
+							<option value="Legal">Legal</option>
+							<option value="Feature Request">Feature Request</option>
+							<option value="Blog Post" <?php if(isset($_GET['ref_blog'])) echo ' selected="selected"'; ?>>Blog Post</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="message">Your message<i class="text-warning">*</i></label>
+						<div>
+							<small class="text-muted">
+								Please be as descriptive as possible.
+							</small>
+						</div>
+						<textarea type="text" class="form-control" minlength="10" maxlength="2500" rows="5" required="required" id="message" name="message"></textarea>
+					</div>
+				</form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" form="contactForm" class="btn btn-primary">Send Message</button>
+            </div>
+        </div>
+    </div>
+</div>

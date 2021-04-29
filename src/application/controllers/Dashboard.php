@@ -18,6 +18,7 @@ class Dashboard extends MY_Controller
 	public function index()
 	{
 		$data['title'] = "Dashboard";
+		$data['user'] = $this->user_model->get_user_by_id($this->session->user_id);
 		$data['user_address'] = $this->user_model->get_user_address_by_id($this->session->user_id);
 		$data['packages'] = $this->delivery_model->get_packages_in_transit($this->session->user_id);
 		$data['delivered'] = $this->delivery_model->get_delivered_packages($this->session->user_id, 5);
@@ -121,6 +122,46 @@ class Dashboard extends MY_Controller
 			echo "no trackin id";
 		}
 		
+	}
+
+	public function update_notifications() {
+		if($_SERVER['REQUEST_METHOD'] == "GET") {
+			redirect('dashboard');
+		} else {
+
+			$this->form_validation->set_rules('sms_notifications', 'SMS Notifications', 'trim|required');
+			$this->form_validation->set_rules('deals_notifications', 'Deals Notifications', 'trim|required');
+			$this->form_validation->set_rules('email_notifications', 'Email Notifications', 'trim|required');
+			//run validation
+			if ($this->form_validation->run() == FALSE) {
+				//failed validations
+				echo json_encode(array("response" => "failed_validations", "message" => '<div class="alert alert-danger">'.validation_errors().'</div>' ));
+			} else {
+
+				$sms = $this->input->post('sms_notifications');
+				$email = $this->input->post('email_notifications');
+				$deals = $this->input->post('deals_notifications');
+				
+				if($sms === "true")
+					$sms = 1;
+				else
+					$sms = 0;
+
+				if($deals === "true")
+					$deals = 1;
+				else
+					$deals = 0;
+
+				if($email === "true")
+					$email = 1;
+				else
+					$email = 0;
+
+				$this->user_model->update_notifications($sms, $email, $deals, $this->session->user_id);
+				echo json_encode(array("response" => "success", "message" => '<div class="alert alert-success">Notification Preferences Updated.</div>' ));
+			}
+		
+		}
 	}
 
 }

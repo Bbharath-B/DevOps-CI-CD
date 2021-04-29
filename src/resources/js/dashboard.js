@@ -104,4 +104,46 @@ window.onload = function() {
 		});
 	}
 
+	// Handles submission for updating notifications
+	var updateNotificationsForm = document.getElementById('updateNotificationsForm');
+
+	if(updateNotificationsForm){
+		updateNotificationsForm.addEventListener('submit', function(e){
+			
+			e.preventDefault();
+
+			var sms_notifications = document.getElementById('sms_notifications_switch');
+			var email_notifications = document.getElementById('email_notifications_switch');
+			var deals_notifications = document.getElementById('deals_notifications_switch');
+
+			var notifications_notification = document.getElementById('notifications_notification');
+			notifications_notification.innerHTML = "";
+
+			const formData = new FormData();
+			formData.append('sms_notifications', sms_notifications.checked);
+			formData.append('deals_notifications', deals_notifications.checked);
+			formData.append('email_notifications', email_notifications.checked);
+
+			// Send data to backend
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(response) {
+				if (this.readyState == 4 && this.status == 200) {
+					var res = JSON.parse(this.responseText);
+					if (res.response == "require_auth") {
+						window.location.href = '/auth?redirect=' + window.location.href;
+					} else if(res.response == "success") {
+						notifications_notification.innerHTML = res.message;
+					} else if(res.response == "failed_validations") {
+						notifications_notification.innerHTML = res.message;
+					} else {
+						notifications_notification.innerHTML = '<div class="alert alert-danger">An error occurred, please try again later.</div>';
+					}
+				}
+			};
+			xhttp.open("POST", "/dashboard/update_notifications", true);
+			xhttp.send(formData);
+		
+		});
+	}
+
 };

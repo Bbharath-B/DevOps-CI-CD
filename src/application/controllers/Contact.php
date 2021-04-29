@@ -34,22 +34,18 @@ class Contact extends MY_Controller
 					'<b>Subject: </b>'. $this->input->post('subject') . '<br><br>' .
 					'<b>Message: </b>'. strip_tags(html_entity_decode($this->input->post('message'))). '<br><br>';
 
-				$this->email->from('no-reply@kebanas.com', 'Kebanas Contact Form');
-				$this->email->to('contact@kebanas.com');
+				$this->email->from('no-reply@site.com', 'Devops');
+				$this->email->to('contact@site.com');
 				$this->email->reply_to($this->input->post('email'));
 				$this->email->subject('Contact Form Message: ' . $this->input->post('subject'));
 				$this->email->message($content);
 				$this->email->set_mailtype('html');
-				$this->email->send();
+				// $this->email->send();
 
 				echo json_encode(array("response" => "ok", "message" => '<div class="alert alert-success">Thank you, your message has been sent. We\'ll get back to you as soon as possble.</div>'));
 			}
 		}
 
-	}
-
-	public function submit() {
-		
 	}
 
 }

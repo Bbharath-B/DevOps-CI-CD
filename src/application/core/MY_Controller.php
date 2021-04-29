@@ -10,7 +10,7 @@ class MY_Controller extends CI_Controller {
 		// Checks if user is logged in, redirects if not
 		function require_auth(){
 
-			$url = base_url($_SERVER['REQUEST_URI']);
+			$url = site_url($_SERVER['REQUEST_URI']);
 
 			if(!isset($_SESSION['logged_in'])){
 				echo "require_auth";
@@ -22,7 +22,7 @@ class MY_Controller extends CI_Controller {
 		// Checks if requests made via AJAX are cleared for access (user is logged in), responds with error if not
 		function require_auth_ajax(){
 
-			$url = base_url($_SERVER['REQUEST_URI']);
+			$url = site_url($_SERVER['REQUEST_URI']);
 
 			if(!isset($_SESSION['logged_in'])){
 				echo json_encode(array("response" => "require_auth"));
@@ -33,7 +33,7 @@ class MY_Controller extends CI_Controller {
 		// Checks if a user is authorized to view a particular resource | Checks for admin priviliges
 		function require_auth_admin($level = 1){
 
-			$url = base_url($_SERVER['REQUEST_URI']);
+			$url = site_url($_SERVER['REQUEST_URI']);
 
 			if(!isset($_SESSION['logged_in'])){
 				echo "require_auth";

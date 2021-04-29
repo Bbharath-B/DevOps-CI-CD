@@ -1,18 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class About extends MY_Controller 
+class Quote extends MY_Controller 
 {
 	public function __construct()
 	{
 		parent::__construct();
-	}
+    }
 
 	public function index()
 	{
-		$data['title'] = "About";
-		$this->load->template('about', $data);
+		$data['title'] = "Get A Quote";
+		$this->load->template('quote', $data);
 
 	}
-
 }

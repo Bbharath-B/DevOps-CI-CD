@@ -68,6 +68,9 @@
 					<li class="nav-item">
 						<a class="nav-link" href="<?= site_url('contact') ?>">Contact</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<?= site_url('quote') ?>">Get A Quote</a>
+					</li>
 				</ul>
 				<?php if(isset($this->session->logged_in)) { ?>
 				<ul class="navbar-nav">

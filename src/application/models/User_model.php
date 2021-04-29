@@ -137,4 +137,14 @@ class User_model extends CI_Model
 
 	}
 
+	public function update_notifications($sms, $email, $deals, $user_id) {
+		$data = array(
+			'email_notifications' => $email,
+			'deals_notifications' => $deals,
+			'sms_notifications' => $sms
+		);
+
+		return $this->db->where('id', $user_id)->set($data)->update('user');
+	}
+
 }

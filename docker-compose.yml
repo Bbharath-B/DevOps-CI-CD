@@ -2,7 +2,7 @@ version: '3.3'
 services:
   web:
     image: 34.70.123.241:8084/webapp_php
-    container_name: my_app
+    container_name: my_webapp
     depends_on:
       - db
     volumes:

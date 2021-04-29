@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   web:
-    image: 34.70.123.241:8084/web
+    image: 34.70.123.241:8084/web:latest
     container_name: webapp
     depends_on:
       - db

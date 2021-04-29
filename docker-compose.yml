@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   web:
-    image: 34.66.136.31:8085/myphp
+    build: .
     container_name: app
     depends_on:
       - db
